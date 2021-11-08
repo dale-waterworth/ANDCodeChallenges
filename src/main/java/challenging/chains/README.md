@@ -33,6 +33,9 @@ Your task is to write a program which can determine how many separate chains exi
 - open the test and click run
 
 ## Result
+[Test link](https://github.com/dale-waterworth/ANDCodeChallenges/tree/master/src/test/java/challenging/chains)
+
+
 chains = 34
 
 time = 31ms (0.031s) 'getProblemFile()' is the full test
