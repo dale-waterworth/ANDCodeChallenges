@@ -243,8 +243,6 @@ class ChallengingChainsTest {
 
     @Test
     public void getProblemFile() {
-        Instant start = Instant.now();
-
         var lines = getFileAsLines();
 
         var grid = lines.stream()
@@ -255,11 +253,7 @@ class ChallengingChainsTest {
 
         assertEquals(34, count);
 
-        Instant finish = Instant.now();
-
-
         System.out.println("count: " + count); // 34
-        System.out.println("Time: " +  Duration.between(start, finish).toMillis()); // 24ms (including test)
     }
 
     public List<String> getFileAsLines() {
