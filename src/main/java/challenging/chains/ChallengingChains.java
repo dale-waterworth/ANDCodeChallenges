@@ -8,6 +8,17 @@ public class ChallengingChains {
     public ChallengingChains() {
     }
 
+    public int getCountOfChains(Cell[][] grid) {
+        buildGridMeta(grid);
+
+        for (int y = 0; y < grid.length; y++) {
+            for (int x = 0; x < grid[y].length; x++) {
+                traverser(grid, y, x, true);
+            }
+        }
+        return chains;
+    }
+
     public void buildGridMeta(Cell[][] grid) {
         for (int y = 0; y < grid.length; y++) {
             var rowLength = grid[y].length;
@@ -33,16 +44,7 @@ public class ChallengingChains {
         }
     }
 
-    public int getCountOfChains(Cell[][] grid) {
-        buildGridMeta(grid);
 
-        for (int y = 0; y < grid.length; y++) {
-            for (int x = 0; x < grid[y].length; x++) {
-                traverser(grid, y, x, true);
-            }
-        }
-        return chains;
-    }
 
     private void traverser(Cell[][] grid, int y, int x, boolean caller) {
         var cell = grid[y][x];
