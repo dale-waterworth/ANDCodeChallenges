@@ -35,6 +35,6 @@ Your task is to write a program which can determine how many separate chains exi
 ## Result
 chains = 34
 
-time = 41ms (0.041s)
+time = 31ms (0.031s) 'getProblemFile()' is the full test
 
 ![alt text](https://github.com/dale-waterworth/ANDCodeChallenges/blob/master/src/main/resources/img.png?raw=true)
