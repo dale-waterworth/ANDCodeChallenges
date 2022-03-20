@@ -71,7 +71,9 @@ class ConnectFourTest {
         game.playDisc(Disc.RED, 1);
         game.playDisc(Disc.RED, 2);
         game.playDisc(Disc.RED, 3);
+        game.playDisc(Disc.YELLOW, 4);
         game.playDisc(Disc.RED, 5);
+
 
         assertEquals(false, game.checkHorizontal());
     }
@@ -83,6 +85,27 @@ class ConnectFourTest {
         game.playDisc(Disc.RED, 0);
         game.playDisc(Disc.RED, 0);
         game.playDisc(Disc.RED, 0);
+
+        assertEquals(true, game.checkVertical());
+    }
+
+    @Test
+    public void testConnect4VerticalWithOthers() {
+        game.playDisc(Disc.RED, 0);
+        game.playDisc(Disc.RED, 0);
+        game.playDisc(Disc.RED, 0);
+        game.playDisc(Disc.YELLOW, 0);
+        game.playDisc(Disc.RED, 0);
+
+        assertEquals(false, game.checkVertical());
+    }
+
+    @Test
+    public void testConnect4VerticalWithOthers2() {
+        game.playDisc(Disc.RED, 2);
+        game.playDisc(Disc.RED, 2);
+        game.playDisc(Disc.RED, 2);
+        game.playDisc(Disc.RED, 2);
 
         assertEquals(true, game.checkVertical());
     }

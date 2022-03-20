@@ -54,7 +54,7 @@ public class ConnectFour {
     public boolean checkVertical() {
         for (int i = 0; i < grid[0].length; i++) {
             var result = 0;
-            for (int j = 0; j < grid.length; j++) {
+            for (int j = grid.length - 1; j > 0; j--) {
                 System.out.println(grid[j][i]);
                 if ((j == 0 || j == grid.length - 1) && grid[j][i] != null) {
                     result++;
@@ -62,8 +62,9 @@ public class ConnectFour {
                         return true;
                     }
                 }
-                if (grid[j][i] != null && grid[j + 1][i] != null
-                        && grid[j][i].disc == grid[j + 1][i].disc) {
+
+                if (grid[j][i] != null && grid[j - 1][i] != null
+                        && grid[j][i].disc == grid[j - 1][i].disc) {
                     result++;
                     if (result == 4) {
                         return true;
