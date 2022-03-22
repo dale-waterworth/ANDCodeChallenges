@@ -1,6 +1,6 @@
 package connect.four;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class ConnectFour {
 
@@ -27,11 +27,16 @@ public class ConnectFour {
     }
 
 
-    public boolean checkHorizontal() {
+    public boolean checkHorizontal(GridCell[][] grid) {
+
         for (int i = 0; i < grid.length; i++) {
             var result = 0;
+            List<GridCell> row = new LinkedList<>();
             for (int j = 0; j < grid[i].length; j++) {
-                if ((j == 0 || j == grid[i].length - 1) && grid[i][j] != null) {
+                if(grid[i][j] != null){
+
+                }
+                /*if ((j == 0 || j == grid[i].length - 1) && grid[i][j] != null) {
                     result++;
                     if (result == 4) {
                         return true;
@@ -45,7 +50,7 @@ public class ConnectFour {
                     }
                 } else {
                     result = 0;
-                }
+                }*/
             }
         }
         return false;
@@ -75,6 +80,31 @@ public class ConnectFour {
             }
         }
         return false;
+    }
+
+    public boolean checkDiagonal(GridCell[][] grid) {
+        int WIDTH = grid[0].length;
+        int HEIGHT = grid.length;
+        var sideGrid = new GridCell[WIDTH * HEIGHT][WIDTH * HEIGHT];
+        for (int k = 0; k <= WIDTH + HEIGHT - 2; k++) {
+            System.out.println("k" + k);
+            var row = new GridCell[7];
+            for (int j = 0; j <= k; j++) {
+                int i = k - j;
+                if (i < HEIGHT && j < WIDTH) {
+                    row[j] = grid[i][j];
+                    System.out.print(Optional.ofNullable(grid[i][j])
+                            .map(x -> x.disc.toString())
+                            .orElse("-") + " ");
+                }
+            }
+            System.out.println();
+            System.out.println(Arrays.toString(row));
+            sideGrid[k] = row;
+        }
+        System.out.println(Arrays.deepToString(sideGrid));
+
+        return checkHorizontal(sideGrid);
     }
 }
 
