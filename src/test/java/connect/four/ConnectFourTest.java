@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+import static connect.four.ConnectFour.connectYellow;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConnectFourTest {
@@ -47,7 +52,16 @@ class ConnectFourTest {
     }
 
     @Test
-    public void testConnect4Horizontal() {
+    public void testCompareArray() {
+         List<Disc> typicalRow = new LinkedList<>(
+                Arrays.asList(null,Disc.RED,Disc.RED, Disc.YELLOW,Disc.YELLOW,Disc.YELLOW,Disc.YELLOW)
+        );
+
+        assertTrue(typicalRow.containsAll(connectYellow));
+    }
+
+    @Test
+    public void testConnect4HorizontalRed() {
         game.playDisc(Disc.RED, 0);
         game.playDisc(Disc.RED, 1);
         game.playDisc(Disc.RED, 2);
@@ -55,6 +69,16 @@ class ConnectFourTest {
 
         assertEquals(true, game.checkHorizontal(game.grid));
     }
+    @Test
+    public void testConnect4HorizontalYellow() {
+        game.playDisc(Disc.YELLOW, 0);
+        game.playDisc(Disc.YELLOW, 1);
+        game.playDisc(Disc.YELLOW, 2);
+        game.playDisc(Disc.YELLOW, 3);
+
+        assertEquals(true, game.checkHorizontal(game.grid));
+    }
+
     @Test
     public void testConnect4HorizontalAtEnd() {
         game.playDisc(Disc.RED, 3);

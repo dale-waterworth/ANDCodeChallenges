@@ -1,9 +1,15 @@
 package connect.four;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ConnectFour {
-
+    static List<Disc> connectYellow = new LinkedList<>(
+            Arrays.asList(Disc.YELLOW, Disc.YELLOW, Disc.YELLOW, Disc.YELLOW)
+    );
+    static List<Disc> connectRed = new LinkedList<>(
+            Arrays.asList(Disc.RED, Disc.RED, Disc.RED, Disc.RED)
+    );
     public GridCell[][] grid;
 
     public ConnectFour() {
@@ -22,7 +28,6 @@ public class ConnectFour {
                 }
             }
         }
-
         System.out.println(Arrays.deepToString(grid).replace("], ", "]\n"));
     }
 
@@ -30,28 +35,15 @@ public class ConnectFour {
     public boolean checkHorizontal(GridCell[][] grid) {
 
         for (int i = 0; i < grid.length; i++) {
-            var result = 0;
-            List<GridCell> row = new LinkedList<>();
-            for (int j = 0; j < grid[i].length; j++) {
-                if(grid[i][j] != null){
+            List<Disc> row = new LinkedList<>(Arrays.asList(
+                    grid[i]).stream()
+                    .filter(Objects::nonNull)
+                    .map(x -> x.disc).collect(Collectors.toList()));
 
-                }
-                /*if ((j == 0 || j == grid[i].length - 1) && grid[i][j] != null) {
-                    result++;
-                    if (result == 4) {
-                        return true;
-                    }
-                }
-                if (grid[i][j] != null && grid[i][j + 1] != null
-                        && grid[i][j].disc == grid[i][j + 1].disc) {
-                    result++;
-                    if (result == 4) {
-                        return true;
-                    }
-                } else {
-                    result = 0;
-                }*/
+            if(row.containsAll(connectRed) || row.containsAll(connectYellow)){
+                return true;
             }
+
         }
         return false;
     }
