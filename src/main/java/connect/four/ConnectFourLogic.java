@@ -3,16 +3,12 @@ package connect.four;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ConnectFour {
-    static List<Disc> connectYellow = new LinkedList<>(
-            Arrays.asList(Disc.YELLOW, Disc.YELLOW, Disc.YELLOW, Disc.YELLOW)
-    );
-    static List<Disc> connectRed = new LinkedList<>(
-            Arrays.asList(Disc.RED, Disc.RED, Disc.RED, Disc.RED)
-    );
+public class ConnectFourLogic {
+    static int connectYellow = Arrays.asList(Disc.YELLOW, Disc.YELLOW, Disc.YELLOW, Disc.YELLOW).hashCode();
+    static int connectRed = Arrays.asList(Disc.RED, Disc.RED, Disc.RED, Disc.RED).hashCode();
     public GridCell[][] grid;
 
-    public ConnectFour() {
+    public ConnectFourLogic() {
         grid = new GridCell[6][7];
     }
 
@@ -32,15 +28,14 @@ public class ConnectFour {
     }
 
 
-    public boolean checkHorizontal(GridCell[][] grid) {
-
+    public boolean checkHorizontal() {
         for (int i = 0; i < grid.length; i++) {
-            List<Disc> row = new LinkedList<>(Arrays.asList(
-                    grid[i]).stream()
+            var row = new LinkedList<>(Arrays.asList(
+                            grid[i]).stream()
                     .filter(Objects::nonNull)
                     .map(x -> x.disc).collect(Collectors.toList()));
 
-            if(row.containsAll(connectRed) || row.containsAll(connectYellow)){
+            if (check4Matches(row)) {
                 return true;
             }
 
@@ -48,55 +43,61 @@ public class ConnectFour {
         return false;
     }
 
+    public boolean check4Matches(List<Disc> row) {
+        var i = 0;
+        while (i + 4 <= row.size()) {
+            var listOf4 = row.subList(i, 4 + i);
+            var groupOfFour = listOf4.hashCode();
+            if (groupOfFour == connectRed || groupOfFour == connectYellow) {
+                return true;
+            }
+            i++;
+        }
+        return false;
+    }
+
     public boolean checkVertical() {
         for (int i = 0; i < grid[0].length; i++) {
-            var result = 0;
+            List<Disc> row = new LinkedList<>();
             for (int j = grid.length - 1; j > 0; j--) {
-                System.out.println(grid[j][i]);
-                if ((j == 0 || j == grid.length - 1) && grid[j][i] != null) {
-                    result++;
-                    if (result == 4) {
-                        return true;
-                    }
-                }
+                row.add(Optional.ofNullable(grid[j][i])
+                        .map(x -> x.disc)
+                        .orElse(null));
+            }
 
-                if (grid[j][i] != null && grid[j - 1][i] != null
-                        && grid[j][i].disc == grid[j - 1][i].disc) {
-                    result++;
-                    if (result == 4) {
-                        return true;
-                    }
-                } else {
-                    result = 0;
-                }
+            if (check4Matches(row)) {
+                return true;
             }
         }
         return false;
     }
 
-    public boolean checkDiagonal(GridCell[][] grid) {
+    public boolean checkDiagonal() {
         int WIDTH = grid[0].length;
         int HEIGHT = grid.length;
         var sideGrid = new GridCell[WIDTH * HEIGHT][WIDTH * HEIGHT];
         for (int k = 0; k <= WIDTH + HEIGHT - 2; k++) {
             System.out.println("k" + k);
-            var row = new GridCell[7];
+            List<Disc> row = new LinkedList<>();
             for (int j = 0; j <= k; j++) {
                 int i = k - j;
                 if (i < HEIGHT && j < WIDTH) {
-                    row[j] = grid[i][j];
+                    row.add(Optional.ofNullable(grid[i][j])
+                            .map(x -> x.disc)
+                            .orElse(null));
                     System.out.print(Optional.ofNullable(grid[i][j])
                             .map(x -> x.disc.toString())
                             .orElse("-") + " ");
                 }
             }
-            System.out.println();
-            System.out.println(Arrays.toString(row));
-            sideGrid[k] = row;
-        }
-        System.out.println(Arrays.deepToString(sideGrid));
 
-        return checkHorizontal(sideGrid);
+            if (check4Matches(row)) {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 }
 

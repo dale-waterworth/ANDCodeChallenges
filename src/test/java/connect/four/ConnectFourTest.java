@@ -8,16 +8,15 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import static connect.four.ConnectFour.connectYellow;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConnectFourTest {
 
-    ConnectFour game;
+    ConnectFourLogic game;
 
     @BeforeEach
     public void beforeEach() {
-        game = new ConnectFour();
+        game = new ConnectFourLogic();
     }
 
     @Test
@@ -52,12 +51,27 @@ class ConnectFourTest {
     }
 
     @Test
-    public void testCompareArray() {
-         List<Disc> typicalRow = new LinkedList<>(
-                Arrays.asList(null,Disc.RED,Disc.RED, Disc.YELLOW,Disc.YELLOW,Disc.YELLOW,Disc.YELLOW)
+    public void check4MatchesAtStart() {
+        List<Disc> typicalRow = new LinkedList<>(
+                Arrays.asList(Disc.RED, Disc.RED, Disc.RED, Disc.RED, Disc.YELLOW, Disc.YELLOW, Disc.YELLOW)
         );
 
-        assertTrue(typicalRow.containsAll(connectYellow));
+        assertTrue(game.check4Matches(typicalRow));
+    }
+
+    @Test
+    public void check4MatchesAtEnd() {
+        List<Disc> typicalRow = Arrays.asList(Disc.RED, Disc.RED, Disc.RED, Disc.YELLOW, Disc.YELLOW, Disc.YELLOW, Disc.YELLOW);
+
+        assertTrue(game.check4Matches(typicalRow));
+    }
+
+    @Test
+    public void checkNoneMatches() {
+        List<Disc> typicalRow = Arrays.asList(null, Disc.RED, Disc.RED, Disc.YELLOW, Disc.YELLOW, Disc.RED, Disc.YELLOW);
+
+
+        assertFalse(game.check4Matches(typicalRow));
     }
 
     @Test
@@ -67,8 +81,9 @@ class ConnectFourTest {
         game.playDisc(Disc.RED, 2);
         game.playDisc(Disc.RED, 3);
 
-        assertEquals(true, game.checkHorizontal(game.grid));
+        assertEquals(true, game.checkHorizontal());
     }
+
     @Test
     public void testConnect4HorizontalYellow() {
         game.playDisc(Disc.YELLOW, 0);
@@ -76,7 +91,7 @@ class ConnectFourTest {
         game.playDisc(Disc.YELLOW, 2);
         game.playDisc(Disc.YELLOW, 3);
 
-        assertEquals(true, game.checkHorizontal(game.grid));
+        assertEquals(true, game.checkHorizontal());
     }
 
     @Test
@@ -86,7 +101,7 @@ class ConnectFourTest {
         game.playDisc(Disc.RED, 5);
         game.playDisc(Disc.RED, 6);
 
-        assertEquals(true, game.checkHorizontal(game.grid));
+        assertEquals(true, game.checkHorizontal());
     }
 
     @Test
@@ -99,7 +114,7 @@ class ConnectFourTest {
         game.playDisc(Disc.RED, 5);
 
 
-        assertEquals(false, game.checkHorizontal(game.grid));
+        assertEquals(false, game.checkHorizontal());
     }
 
 
@@ -135,7 +150,13 @@ class ConnectFourTest {
     }
 
     @Test
-    public void testDiagonal() {
+    public void testDiagonalBottomLeftToTopRight() {
+        /**
+         * yyyr
+         * yyry
+         * yryy
+         * ryyy
+         */
         game.playDisc(Disc.RED, 2);
         game.playDisc(Disc.YELLOW, 2);
         game.playDisc(Disc.YELLOW, 2);
@@ -156,7 +177,38 @@ class ConnectFourTest {
         game.playDisc(Disc.YELLOW, 5);
         game.playDisc(Disc.RED, 5);
 
-        assertEquals(true, game.checkDiagonal(game.grid));
+        assertEquals(true, game.checkDiagonal());
+    }
+
+    @Test
+    public void testDiagonalBottomRightToTopLeft() {
+        /**
+         * ryyy
+         * yryy
+         * yyry
+         * yyyr
+         */
+        game.playDisc(Disc.YELLOW, 2);
+        game.playDisc(Disc.YELLOW, 2);
+        game.playDisc(Disc.YELLOW, 2);
+        game.playDisc(Disc.RED, 2);
+
+        game.playDisc(Disc.YELLOW, 3);
+        game.playDisc(Disc.YELLOW, 3);
+        game.playDisc(Disc.RED, 3);
+        game.playDisc(Disc.YELLOW, 3);
+
+        game.playDisc(Disc.YELLOW, 4);
+        game.playDisc(Disc.RED, 4);
+        game.playDisc(Disc.YELLOW, 4);
+        game.playDisc(Disc.YELLOW, 4);
+
+        game.playDisc(Disc.RED, 5);
+        game.playDisc(Disc.YELLOW, 5);
+        game.playDisc(Disc.YELLOW, 5);
+        game.playDisc(Disc.YELLOW, 5);
+
+        assertEquals(true, game.checkDiagonal());
     }
 
 
