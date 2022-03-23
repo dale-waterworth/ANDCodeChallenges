@@ -29,7 +29,6 @@ public class ConnectFourLogic {
                 }
             }
         }
-        System.out.println(Arrays.deepToString(grid).replace("], ", "]\n"));
     }
 
 
@@ -80,9 +79,7 @@ public class ConnectFourLogic {
     public boolean checkDiagonal() {
         int WIDTH = grid[0].length;
         int HEIGHT = grid.length;
-        var sideGrid = new GridCell[WIDTH * HEIGHT][WIDTH * HEIGHT];
         for (int k = 0; k <= WIDTH + HEIGHT - 2; k++) {
-            System.out.println("k" + k);
             List<Disc> row = new LinkedList<>();
             for (int j = 0; j <= k; j++) {
                 int i = k - j;
@@ -90,9 +87,6 @@ public class ConnectFourLogic {
                     row.add(Optional.ofNullable(grid[i][j])
                             .map(x -> x.disc)
                             .orElse(null));
-                    System.out.print(Optional.ofNullable(grid[i][j])
-                            .map(x -> x.disc.toString())
-                            .orElse("-") + " ");
                 }
             }
 
