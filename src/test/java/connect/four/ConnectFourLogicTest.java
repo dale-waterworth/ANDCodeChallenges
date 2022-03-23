@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ConnectFourTest {
+class ConnectFourLogicTest {
 
     ConnectFourLogic game;
 
@@ -211,5 +211,16 @@ class ConnectFourTest {
         assertEquals(true, game.checkDiagonal());
     }
 
+
+    @Test
+    public void testSampleInput(){
+        PlayInput playInput = game.convertInput("A_Red");
+        Assertions.assertEquals(0, playInput.column);
+        Assertions.assertEquals(Disc.RED, playInput.disc);
+
+        PlayInput playInput2 = game.convertInput("G_Yellow");
+        Assertions.assertEquals(6, playInput2.column);
+        Assertions.assertEquals(Disc.YELLOW, playInput2.disc);
+    }
 
 }

@@ -1,6 +1,7 @@
 package connect.four;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class ConnectFourLogic {
@@ -10,6 +11,10 @@ public class ConnectFourLogic {
 
     public ConnectFourLogic() {
         grid = new GridCell[6][7];
+    }
+
+    public void playDisc(PlayInput playInput) {
+        playDisc(playInput.disc, playInput.column);
     }
 
     public void playDisc(Disc disc, int column) {
@@ -99,10 +104,64 @@ public class ConnectFourLogic {
         return false;
 
     }
+
+    public PlayInput convertInput(String input) {
+        var split = input.split("_");
+        return new PlayInput(ROW.valueOf(split[0]).getValue(), Disc.get(split[1]));
+    }
+
+
 }
 
 enum Disc {
-    RED, YELLOW
+    RED("Red"), YELLOW("Yellow");
+    private final String name;
+    private static final Map<String,Disc> discMap;
+
+    private Disc(String s) {
+        name = s;
+    }
+    public String getName() {
+        return this.name;
+    }
+
+    static {
+        Map<String,Disc> map = new ConcurrentHashMap<String, Disc>();
+        for (Disc instance : Disc.values()) {
+            map.put(instance.getName().toLowerCase(),instance);
+        }
+        discMap = Collections.unmodifiableMap(map);
+    }
+
+    public static Disc get (String name) {
+        return discMap.get(name.toLowerCase());
+    }
+
+
+}
+
+class PlayInput {
+    Disc disc;
+    int column;
+
+    public PlayInput(int column, Disc disc) {
+        this.disc = disc;
+        this.column = column;
+    }
+}
+
+enum ROW {
+    A(0), B(1), C(2), D(3), E(4), F(5), G(6);
+
+    private final int value;
+
+    private ROW(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }
 
 class GridCell {
