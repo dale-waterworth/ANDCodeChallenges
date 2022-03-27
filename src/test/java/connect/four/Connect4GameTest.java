@@ -1,6 +1,5 @@
 package connect.four;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -85,5 +84,18 @@ class Connect4GameTest {
         }
         assertEquals(Disc.RED, winner);
 
+    }
+
+    @Test
+    public void testWeirdBug1() {
+        game.makeMove(new PlayInput(0, Disc.RED));
+        game.makeMove(new PlayInput(1, Disc.YELLOW));
+        game.makeMove(new PlayInput(2, Disc.YELLOW));
+        game.makeMove(new PlayInput(3, Disc.YELLOW));
+        game.makeMove(new PlayInput(5, Disc.YELLOW));
+
+        game.printBoard();
+
+        assertNull(game.checkForWinner(new PlayInput(5, Disc.YELLOW)));
     }
 }

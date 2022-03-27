@@ -8,13 +8,17 @@ Running the game against these sample sets of moves should output the correct wi
 
 If the game is over before the set of moves ends, the game should ignore the remaining moves and return the rightful winner.
 
-Rewards:
+## Rewards:
 
-:four:  Points are awarded for outputting the correct winner for each sample game
+###:four:  Points are awarded for outputting the correct winner for each sample game
 
-:three:  Further points are awarded for visualising the game on screen (either a proper UI, or as some kind of console-art)
+answer: Yellow - Red - Red
 
-:three:  Further points are awarded for creating an interactive game which can be played against a basic computer player
+###:three:  Further points are awarded for visualising the game on screen (either a proper UI, or as some kind of console-art)
+
+
+
+###:three:  Further points are awarded for creating an interactive game which can be played against a basic computer player
 
 Submission:
 

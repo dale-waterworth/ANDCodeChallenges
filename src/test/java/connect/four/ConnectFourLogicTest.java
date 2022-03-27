@@ -117,7 +117,6 @@ class ConnectFourLogicTest {
         assertEquals(false, game.checkHorizontal());
     }
 
-
     @Test
     public void testConnect4Vertical() {
         game.playDisc(Disc.RED, 0);
