@@ -7,3 +7,4 @@
 # Connect 4
 
 [Code link](https://github.com/dale-waterworth/ANDCodeChallenges/tree/master/src/main/java/connect/four)
+[Test link](https://github.com/dale-waterworth/ANDCodeChallenges/tree/master/src/test/java/connect/four)
