@@ -10,16 +10,17 @@ If the game is over before the set of moves ends, the game should ignore the rem
 
 ## Rewards:
 
-###:four:  Points are awarded for outputting the correct winner for each sample game
+### :four:  Points are awarded for outputting the correct winner for each sample game
 
-answer: Yellow - Red - Red
+**answer: Yellow - Red - Red**
 
-###:three:  Further points are awarded for visualising the game on screen (either a proper UI, or as some kind of console-art)
+### :three:  Further points are awarded for visualising the game on screen (either a proper UI, or as some kind of console-art)
 
+![visual 2 player](https://github.com/dale-waterworth/ANDCodeChallenges/blob/84290acdc7bacf05802ead979cec7089c8fcbd01/docs/connect4/winner-is-red.png)
 
-![visual 2 player]('../../../docs/connect4/winner-is-red.png')
+### :three:  Further points are awarded for creating an interactive game which can be played against a basic computer player
 
-###:three:  Further points are awarded for creating an interactive game which can be played against a basic computer player
+![interactive](https://github.com/dale-waterworth/ANDCodeChallenges/blob/84290acdc7bacf05802ead979cec7089c8fcbd01/docs/connect4/1or2-player.png)
 
 Submission:
 
