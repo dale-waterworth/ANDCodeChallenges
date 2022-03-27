@@ -94,8 +94,6 @@ class Connect4GameTest {
         game.makeMove(new PlayInput(3, Disc.YELLOW));
         game.makeMove(new PlayInput(5, Disc.YELLOW));
 
-        game.printBoard();
-
         assertNull(game.checkForWinner(new PlayInput(5, Disc.YELLOW)));
     }
 }

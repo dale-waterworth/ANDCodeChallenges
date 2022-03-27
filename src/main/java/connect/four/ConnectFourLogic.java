@@ -36,8 +36,13 @@ public class ConnectFourLogic {
         for (int i = 0; i < grid.length; i++) {
             var row = new LinkedList<>(Arrays.asList(
                             grid[i]).stream()
-                    .filter(Objects::nonNull)
-                    .map(x -> x.disc).collect(Collectors.toList()));
+                    .map(x -> {
+                        if(x != null){
+                            return x.disc;
+                        } else {
+                            return null;
+                        }
+                    }).collect(Collectors.toList()));
 
             if (check4Matches(row)) {
                 return true;
@@ -77,13 +82,13 @@ public class ConnectFourLogic {
     }
 
     public boolean checkDiagonal() {
-        int WIDTH = grid[0].length;
-        int HEIGHT = grid.length;
-        for (int k = 0; k <= WIDTH + HEIGHT - 2; k++) {
+        int width = grid[0].length;
+        int height = grid.length;
+        for (int k = 0; k <= width + height - 2; k++) {
             List<Disc> row = new LinkedList<>();
             for (int j = 0; j <= k; j++) {
                 int i = k - j;
-                if (i < HEIGHT && j < WIDTH) {
+                if (i < height && j < width) {
                     row.add(Optional.ofNullable(grid[i][j])
                             .map(x -> x.disc)
                             .orElse(null));
