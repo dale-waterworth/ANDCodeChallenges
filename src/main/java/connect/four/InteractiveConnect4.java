@@ -67,7 +67,7 @@ public class InteractiveConnect4 {
 
         if (winner != null) {
             for (int i = 0; i < 100; i++) {
-                System.out.print("WINNER IS: " + winner.disc);
+                System.out.print("** WINNER IS: " + winner.disc + " **");
                 if (i % 5 == 0) {
                     System.out.println("");
                 }

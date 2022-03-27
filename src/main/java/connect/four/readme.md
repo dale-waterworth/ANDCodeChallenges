@@ -17,6 +17,7 @@ answer: Yellow - Red - Red
 ###:three:  Further points are awarded for visualising the game on screen (either a proper UI, or as some kind of console-art)
 
 
+![visual 2 player]('../../../docs/connect4/winner-is-red.png')
 
 ###:three:  Further points are awarded for creating an interactive game which can be played against a basic computer player
 
