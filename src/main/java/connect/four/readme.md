@@ -12,7 +12,7 @@ If the game is over before the set of moves ends, the game should ignore the rem
 
 ### :four:  Points are awarded for outputting the correct winner for each sample game
 
-**answer: Yellow - Red - Red**
+**answer: Yellow - Red - Red (see Connect4GameTest)**
 
 ### :three:  Further points are awarded for visualising the game on screen (either a proper UI, or as some kind of console-art)
 
